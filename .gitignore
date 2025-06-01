@@ -8,4 +8,6 @@ solutions/java/out/
 solutions/c++/.idea/
 
 solutions/c#/bin/
-solutions/c#/obj/
+solutions/c#/obj
+
+out
