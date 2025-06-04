@@ -1,0 +1,74 @@
+Vending machine
+
+Different states.
+The context will behave Differently at Different state.
+Instead of writing conditional statements. we can make the system to behave Different using state class.
+
+
+Template
+
+interface State {
+    void handle();
+}
+class Context {
+    private State state;
+    void setState(State state) { this.state = state; }
+    void request() { state.handle(); }
+}
+class ConcreteState implements State {
+    public void handle() {}
+}
+
+
+
+Vending Machine states:
+
+IdelState -> select product -> ReadyState -> insert coin/note -> DispenseState -> dispense product -> ReturnChangesState -> return changes/reset the values -> IdelState
+
+
+
+interface State {
+    void selectProduct();
+    void insertMoney();
+    void dispenseProduct();
+    void returnChanges();
+}
+
+Enum MoneyType {
+    COIN,
+    NOTE
+}
+
+abstract Money {
+    int value;
+    MoneyType type;
+    Money(value, type) {
+        this.value = value;
+        this.type = type;
+    }
+    getValue();
+    getType();
+}
+
+class One extents Money {
+    One() {
+        super(1, MoneyType.COIN)
+    }
+}
+
+
+class Inventory {
+    Map<Product, Integer> inventoryMap;
+    Inventory() {
+        inventoryMap = new ConcurrentHashMap<>();
+    }
+    addInventory(Product product, Integer quantity) {
+    }
+    reduceInventory(Product product, Integer quantity) {
+    }
+}
+
+class Product {
+    String name;
+    Integer price;
+}
