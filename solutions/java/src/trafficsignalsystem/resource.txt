@@ -1,0 +1,62 @@
+
+
+STATE Interface:
+Interface LightState
+handle();
+
+
+STATES:
+Class GreeLight implements LightState
+
+Class RedLight implements LightState
+
+Class YellowLight implements LightState
+
+
+
+Context:
+Class TrafficLight
+- state = RedLight()
++ handle()
++ setState()
+
+
+Intersection
+- TrafficSignalController
+- Map<Direction, TrafficLight>
+- Map<Direction, Map<Lights, Integer>> timerMap;
+- start(Direction)
+
+
+Enum Direction
+NORTH, SOUTH, EAST, WEST
+
+
+TrafficSignalController -> will manage the lights, Road Direction, Timer.
+- Map<Direction, TrafficLight>
+- Map<Direction, Map<Lights, Integer>> timerMap
+- start(Direction) - with Green
+
+
+Transition
+Green -> Yellow -> Red -> nextDirection -> Green -> Yellow -> Red -> nextDirection
+
+
+
+how to get the nextDirection? int next = (currentDirection.ordinal() + 1) % directions.length;
+how to implement the timer? private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+
+Initial start
+
+Start with the NORTH, GREEN.
+Have delay for each shifting.
+Once Red reached, start another direction.
+
+Should be round-robin.
+
+
+
+
+Do we need to track the vehicle?
+Do we need to handle lanes?
